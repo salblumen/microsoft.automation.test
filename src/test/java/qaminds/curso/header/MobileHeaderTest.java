@@ -23,14 +23,26 @@ public class MobileHeaderTest extends BaseTest {
         String[] submenuList = {"Software","PCs y dispositivos","Entretenimiento","Empresas","Desarrollador y TI","Otros"};
 
 
-        WebElement toggleMenu = getDriver().findElement(By.cssSelector("#headerUniversalHeader > header > div > div > button.c-action-trigger.c-glyph.glyph-global-nav-button"));
+        WebElement toggleMenu = getDriver().findElement(By.cssSelector("button.c-action-trigger.c-glyph.glyph-global-nav-button"));
         toggleMenu.click();
 
-        WebElement menuElement = getDriver().findElement(By.cssSelector("#uhf-g-nav > ul"));
+        WebElement menuElement = getDriver().findElement(By.cssSelector("li.c-w0-contr.c-w0-contr-desktop-hidden > ul"));
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfAllElements(menuElement.findElements(By.tagName("a"))));
+
         List<String> myList = menuElement.findElements(By.tagName("a")).stream().map(WebElement::getText)
                 .collect(Collectors.toList());
 
+        List<WebElement> secondList = getDriver().findElements(By.cssSelector("#uhf-c-nav > ul li.f-sub-menu > button"));
+        wait.until(ExpectedConditions.elementToBeClickable(secondList.get(0)));
+
+        List<String> myList2 = secondList.stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
+
         assertThat(myList).contains(menuList);
+        assertThat(myList2).contains(submenuList);
 
         }
 
