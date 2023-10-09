@@ -1,0 +1,18 @@
+<suite name="Microsoft">
+
+    <test name="DesktopTests">
+        <parameter name="platform" value="desktop"/>
+        <classes>
+            <class name="qaminds.curso.header.DesktopAboutWindowsHeaderTest"/>
+        </classes>
+    </test>
+
+<!--    <test name="MobileTests">-->
+<!--        <parameter name="platform" value="mobile"/>-->
+<!--        <classes>-->
+<!--            <class name="qaminds.curso.header.MobileHeaderTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+
+</suite>
